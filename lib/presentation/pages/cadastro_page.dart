@@ -15,21 +15,23 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
   final _formKey = GlobalKey<FormState>();
   final nomeController = TextEditingController();
   final descricaoController = TextEditingController();
-  final statusController = TextEditingController();
   final dataInicioController = TextEditingController();
   final dataFimController = TextEditingController();
   final TarefaViewmodel _viewModel = TarefaViewmodel(TarefaRepository());
 
-  Future<void> saveTarefa() async {
+  saveTarefa() async {
+    try {
     if (_formKey.currentState!.validate()) {
       final tarefa = Tarefa(
         nome: nomeController.text,
         descricao: descricaoController.text,
-        status: statusController.text,
+        status: 'Pendente',
         dataInicio: dataInicioController.text,
         dataFim: dataFimController.text,
       );
-      // print(dog.toMap());
+      print(tarefa.toMap());
+      // print(nomeController.text);
+
       await _viewModel.addTarefa(tarefa);
 
       // Verifica se o widget ainda está montado antes de exibir o Snackbar ou navegar
@@ -40,6 +42,11 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
         Navigator.pop(context); // Fecha a página após salvar
       }
     }
+      } catch (e) {
+        print(e);
+      }
+
+
   }
 
   @override
@@ -103,17 +110,54 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           keyboardType: TextInputType.number,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Por favor entre com a idade';
+                              return 'Por favor entre com a descrição';
                             }
-                            if (int.tryParse(value) == null) {
-                              return 'Por favor entre com um número válido';
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: dataInicioController,
+                          keyboardType: TextInputType.datetime,
+                          decoration: InputDecoration(
+                            labelText: 'Data de Inicio',
+                            labelStyle: TextStyle(color: Colors.teal.shade700),
+                            border: const OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.teal.shade700),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor entre com a data de inicio';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: dataFimController,
+                          keyboardType: TextInputType.datetime,
+                          decoration: InputDecoration(
+                            labelText: 'Data de Fim',
+                            labelStyle: TextStyle(color: Colors.teal.shade700),
+                            border: const OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Colors.teal.shade700),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Por favor entre com a data de fim';
                             }
                             return null;
                           },
                         ),
                         const SizedBox(height: 30),
                         ElevatedButton.icon(
-                          onPressed: saveDog,
+                          onPressed: saveTarefa,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.teal,
                             padding: const EdgeInsets.symmetric(

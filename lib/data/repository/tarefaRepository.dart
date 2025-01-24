@@ -7,7 +7,7 @@ class TarefaRepository {
   Future<void> insertTarefa(Tarefa tarefa) async {
     final db = await DatabaseHelper.initDb();
     await db.insert(
-      'tarefas',
+      'tarefa',
       tarefa.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -15,7 +15,7 @@ class TarefaRepository {
 
   Future<List<Tarefa>> getTarefa() async {
     final db = await DatabaseHelper.initDb();
-    final List<Map<String, Object?>> tarefaMaps = await db.query('tarefas');
+    final List<Map<String, Object?>> tarefaMaps = await db.query('tarefa');
     return tarefaMaps.map((map) {
       return Tarefa(
           id: map['id'] as int,
@@ -30,7 +30,7 @@ class TarefaRepository {
   Future<void> updateTarefa(Tarefa tarefa) async {
     final db = await DatabaseHelper.initDb();
     await db.update(
-      'tarefas',
+      'tarefa',
       tarefa.toMap(),
       where: 'id = ?',
       whereArgs: [tarefa.id],
@@ -40,7 +40,7 @@ class TarefaRepository {
   Future<void> deleteTarefa(int id) async {
     final db = await DatabaseHelper.initDb();
     await db.delete(
-      'tarefas',
+      'tarefa',
       where: 'id = ?',
       whereArgs: [id],
     );

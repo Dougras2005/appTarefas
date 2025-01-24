@@ -1,4 +1,5 @@
 import 'package:app_gerenciamento_de_tarefas/data/repository/tarefaRepository.dart';
+import 'package:app_gerenciamento_de_tarefas/presentation/pages/cadastro_page.dart';
 import 'package:app_gerenciamento_de_tarefas/presentation/viewmodel/tarefaViewmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -121,10 +122,10 @@ class HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const DogPageForm()),
-          // ).then((_) => _loadDogs());
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CadastroTarefa()),
+          ).then((_) => _loadTarefas());
         },
         backgroundColor: Colors.teal,
         tooltip: 'Adicionar Tarefa', // Cor do botão
