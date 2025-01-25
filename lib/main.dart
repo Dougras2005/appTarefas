@@ -1,3 +1,4 @@
+import 'package:app_gerenciamento_de_tarefas/presentation/pages/cadastro_page.dart';
 import 'package:app_gerenciamento_de_tarefas/presentation/pages/home_Page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'App Tarefas',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
+      routes: {
+        '/CadastroProduto': (context) =>
+        const CadastroTarefa(), // Adicione a página de cadastro de tarefas
+
+      },
     );
   }
 }

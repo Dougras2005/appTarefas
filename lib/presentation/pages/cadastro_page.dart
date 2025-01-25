@@ -54,7 +54,7 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastro de Tarefas'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -73,7 +73,7 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.teal,
+                            color: Colors.blue,
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -81,11 +81,11 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           controller: nomeController,
                           decoration: InputDecoration(
                             labelText: 'Nome',
-                            labelStyle: TextStyle(color: Colors.teal.shade700),
+                            labelStyle: TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.teal.shade700),
+                              BorderSide(color: Colors.blue),
                             ),
                           ),
                           validator: (value) {
@@ -100,11 +100,11 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           controller: descricaoController,
                           decoration: InputDecoration(
                             labelText: 'Descricao',
-                            labelStyle: TextStyle(color: Colors.teal.shade700),
+                            labelStyle: TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.teal.shade700),
+                              BorderSide(color: Colors.blue),
                             ),
                           ),
                           keyboardType: TextInputType.number,
@@ -121,11 +121,11 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             labelText: 'Data de Inicio',
-                            labelStyle: TextStyle(color: Colors.teal.shade700),
+                            labelStyle: TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.teal.shade700),
+                              BorderSide(color: Colors.blue),
                             ),
                           ),
                           validator: (value) {
@@ -141,11 +141,11 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             labelText: 'Data de Fim',
-                            labelStyle: TextStyle(color: Colors.teal.shade700),
+                            labelStyle: TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Colors.teal.shade700),
+                              BorderSide(color: Colors.blue),
                             ),
                           ),
                           validator: (value) {
@@ -159,7 +159,7 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                         ElevatedButton.icon(
                           onPressed: saveTarefa,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
+                            backgroundColor: Colors.blue,
                             padding: const EdgeInsets.symmetric(
                               vertical: 15.0,
                               horizontal: 30.0,

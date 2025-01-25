@@ -34,32 +34,32 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Gestão de Tarefas'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue,
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.teal.shade300,
+                color: Colors.blue,
               ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage('images/profile_image.png'),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Bem-vindo!',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ],
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
               ),
             ),
-          ],
+      ListTile(
+        leading: const Icon(Icons.add),
+        title: const Text('Cadastro de Tarefas'),
+        onTap: () {
+          Navigator.pushNamed(context, '/CadastroTarefa');
+        },
+          ),
+        ],
         ),
       ),
       body: Padding(
@@ -79,7 +79,7 @@ class HomePageState extends State<HomePage> {
               ),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: Colors.teal.shade300,
+                  backgroundColor: Colors.blue,
                   child: Text(
                     tarefa.nome[0], // Primeira letra do nome
                     style: const TextStyle(color: Colors.white),
@@ -110,7 +110,7 @@ class HomePageState extends State<HomePage> {
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
-                        // _deleteDog(dog);
+                        // deleteTarefa(tarefa);
                       },
                     ),
                   ],
@@ -127,7 +127,7 @@ class HomePageState extends State<HomePage> {
             MaterialPageRoute(builder: (context) => const CadastroTarefa()),
           ).then((_) => _loadTarefas());
         },
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue,
         tooltip: 'Adicionar Tarefa', // Cor do botão
         child: const Icon(Icons.add, size: 30),
       ),

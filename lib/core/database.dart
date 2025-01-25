@@ -5,6 +5,7 @@ class DatabaseHelper {
   static Future<Database> initDb() async {
     return openDatabase(
         join(await getDatabasesPath(), 'tarefa_database.db'),
+        version: 1,
         onCreate: (db, version) async {
           // Criação da tabela
           await db.execute(
