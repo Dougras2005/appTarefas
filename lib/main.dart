@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       routes: {
-        '/CadastroProduto': (context) =>
+        '/CadastroTarefa': (context) =>
         const CadastroTarefa(), // Adicione a página de cadastro de tarefas
 
       },

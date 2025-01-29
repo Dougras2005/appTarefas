@@ -124,13 +124,31 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                             labelStyle: TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue),
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.calendar_today, color: Colors.blue),
+                              onPressed: () async {
+                                // Abre o date picker e aguarda a seleção da data
+                                final DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(), // Data inicial (hoje)
+                                  firstDate: DateTime(2000), // Data mínima permitida
+                                  lastDate: DateTime(2101), // Data máxima permitida
+                                );
+
+                                // Se o usuário selecionar uma data, atualiza o campo
+                                if (pickedDate != null) {
+                                  // Formata a data para o formato desejado (opcional)
+                                  String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                                  dataInicioController.text = formattedDate; // Atualiza o controlador
+                                }
+                              },
                             ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Por favor entre com a data de inicio';
+                              return 'Por favor, selecione a data de fim';
                             }
                             return null;
                           },
@@ -144,13 +162,31 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                             labelStyle: TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue),
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.calendar_today, color: Colors.blue),
+                              onPressed: () async {
+                                // Abre o date picker e aguarda a seleção da data
+                                final DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(), // Data inicial (hoje)
+                                  firstDate: DateTime(2000), // Data mínima permitida
+                                  lastDate: DateTime(2101), // Data máxima permitida
+                                );
+
+                                // Se o usuário selecionar uma data, atualiza o campo
+                                if (pickedDate != null) {
+                                  // Formata a data para o formato desejado (opcional)
+                                  String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                                  dataFimController.text = formattedDate; // Atualiza o controlador
+                                }
+                              },
                             ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Por favor entre com a data de fim';
+                              return 'Por favor, selecione a data de fim';
                             }
                             return null;
                           },
