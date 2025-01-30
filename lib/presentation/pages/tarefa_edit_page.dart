@@ -57,7 +57,7 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Tarefa atualizado com sucesso!')),
         );
-        Navigator.pop(context, updatedTarefa); // Retorna o tarefa atualizado
+        Navigator.popAndPushNamed(context, '/'); // Retorna o tarefa atualizado
       }
     }
   }
@@ -67,7 +67,7 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edição Dog'),
+        title: const Text('Edição Tarefa'),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
@@ -86,7 +86,7 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
                   child: Column(
                     children: [
                       const Text(
-                        'Editar Dog',
+                        'Editar Tarefa',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -96,10 +96,10 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: nomeController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Nome',
                           labelStyle: TextStyle(color: Colors.blue),
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue),
                           ),
@@ -114,10 +114,10 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: descricaoController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Descrição',
                           labelStyle: TextStyle(color: Colors.blue),
-                          border: const OutlineInputBorder(),
+                          border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue),
                           ),
@@ -125,6 +125,38 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Por favor entre com uma descrição';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      DropdownButtonFormField<String>(
+                        value: statusController.text.isNotEmpty ? statusController.text : null, // Valor inicial
+                        decoration: const InputDecoration(
+                          labelText: 'Status',
+                          labelStyle: TextStyle(color: Colors.blue),
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                        ),
+                        items: [
+                          'Pendente',
+                          'Em andamento',
+                          'Concluída',
+                        ].map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          // Atualiza o valor do controlador quando o usuário seleciona uma opção
+                          statusController.text = newValue ?? '';
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, selecione um status';
                           }
                           return null;
                         },
@@ -155,7 +187,7 @@ class _TarefaEditPageState extends State<TarefaEditPage> {
                               if (pickedDate != null) {
                                 // Formata a data para o formato desejado (opcional)
                                 String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-                                dataFimController.text = formattedDate; // Atualiza o controlador
+                                dataInicioController.text = formattedDate; // Atualiza o controlador
                               }
                             },
                           ),

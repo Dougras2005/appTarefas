@@ -26,10 +26,33 @@ class HomePageState extends State<HomePage> {
 
   Future<void> _loadTarefas() async {
     _tarefas = await _viewModel.getTarefa();
+    
+    
+
+    // Função para converter datas no formato "DD/MM/AAAA"
+    DateTime parseCustomDate(String date) {
+      final parts = date.split('/');
+      if (parts.length == 3) {
+        return DateTime(int.parse(parts[2]), int.parse(parts[1]), int.parse(parts[0]));
+      }
+      throw FormatException('Formato de data inválido: $date');
+    }
+
+    // Ordenar a lista de tarefas pela data de início
+    _tarefas.sort((a, b) {
+      // Converter as strings de dataInicio para DateTime
+      DateTime dataA = parseCustomDate(a.dataInicio);
+      DateTime dataB = parseCustomDate(b.dataInicio);
+      // Comparar as datas
+      return dataA.compareTo(dataB);
+    });
+
     if (mounted) {
       setState(() {});
     }
   }
+ 
+  
 
   Future<void> _deleteTarefa(Tarefa tarefa) async {
     await _viewModel.deleteTarefa(tarefa.id!);
@@ -59,6 +82,19 @@ class HomePageState extends State<HomePage> {
     }
 
     await _loadTarefas();
+  }
+
+  Color _getStatusColor(String status) {
+    switch (status) {
+      case 'Pendente':
+        return Colors.orange;
+      case 'Em andamento':
+        return Colors.blue;
+      case 'Concluída':
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
   }
 
   @override
@@ -127,19 +163,20 @@ class HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                 Text('Descrição: ${tarefa.descricao}'),
-                SizedBox(height: 4), // Espaço vertical entre os textos
+                const SizedBox(height: 4), // Espaço vertical entre os textos
                 Row(
                   children: [
                     Text('Início: ${tarefa.dataInicio}'),
-                    SizedBox(width: 16), // Espaço horizontal entre "Início" e "Fim"
+                    const SizedBox(width: 16), // Espaço horizontal entre "Início" e "Fim"
                     Text('Fim: ${tarefa.dataFim}'),
                   ],
                 ),
-                SizedBox(height: 4), // Espaço vertical entre os textos
+                const SizedBox(height: 4), // Espaço vertical entre os textos
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween, // Alinha o status e os ícones
                     children: [
-                Text('Status: ${tarefa.status}'),
+                      Container(color: _getStatusColor(tarefa.status),
+              child: Text('Status: ${tarefa.status}'),),
                 Row(
                   mainAxisSize: MainAxisSize.min, // Evita que o Row ocupe todo o espaço
                   children: [

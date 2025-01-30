@@ -20,7 +20,7 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
   final TarefaViewmodel _viewModel = TarefaViewmodel(TarefaRepository());
 
   saveTarefa() async {
-    try {
+    // try {
     if (_formKey.currentState!.validate()) {
       final tarefa = Tarefa(
         nome: nomeController.text,
@@ -29,7 +29,7 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
         dataInicio: dataInicioController.text,
         dataFim: dataFimController.text,
       );
-      print(tarefa.toMap());
+      // print(tarefa.toMap());
       // print(nomeController.text);
 
       await _viewModel.addTarefa(tarefa);
@@ -39,12 +39,12 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Tarefa adicionado com sucesso!')),
         );
-        Navigator.pop(context); // Fecha a página após salvar
+        Navigator.popAndPushNamed(context, '/'); // Fecha a página após salvar
       }
     }
-      } catch (e) {
-        print(e);
-      }
+      // } catch (e) {
+      //   print(e);
+      // }
 
 
   }
@@ -79,10 +79,10 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                         const SizedBox(height: 20),
                         TextFormField(
                           controller: nomeController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Nome',
                             labelStyle: TextStyle(color: Colors.blue),
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
                               BorderSide(color: Colors.blue),
@@ -98,10 +98,10 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                         const SizedBox(height: 16),
                         TextFormField(
                           controller: descricaoController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Descricao',
                             labelStyle: TextStyle(color: Colors.blue),
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
                               BorderSide(color: Colors.blue),
@@ -121,13 +121,13 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             labelText: 'Data de Inicio',
-                            labelStyle: TextStyle(color: Colors.blue),
+                            labelStyle: const TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue),
                             ),
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.calendar_today, color: Colors.blue),
+                              icon: const Icon(Icons.calendar_today, color: Colors.blue),
                               onPressed: () async {
                                 // Abre o date picker e aguarda a seleção da data
                                 final DateTime? pickedDate = await showDatePicker(
@@ -148,7 +148,7 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Por favor, selecione a data de fim';
+                              return 'Por favor, selecione a data de Inicio';
                             }
                             return null;
                           },
@@ -159,13 +159,13 @@ class _CadastroTarefaState extends State<CadastroTarefa> {
                           keyboardType: TextInputType.datetime,
                           decoration: InputDecoration(
                             labelText: 'Data de Fim',
-                            labelStyle: TextStyle(color: Colors.blue),
+                            labelStyle: const TextStyle(color: Colors.blue),
                             border: const OutlineInputBorder(),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue),
                             ),
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.calendar_today, color: Colors.blue),
+                              icon: const Icon(Icons.calendar_today, color: Colors.blue),
                               onPressed: () async {
                                 // Abre o date picker e aguarda a seleção da data
                                 final DateTime? pickedDate = await showDatePicker(
